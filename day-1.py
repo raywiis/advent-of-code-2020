@@ -226,4 +226,4 @@ for entry in entries:
         else:
             if (target - entry - fuck) in numbers:
                 print(entry * fuck * (target - entry - fuck))
-                exit();
+                exit()
