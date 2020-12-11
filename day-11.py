@@ -3,6 +3,8 @@ f = open('./day-11-problem.txt')
 area = [[spot for spot in line] for line in f.read().splitlines()]
 reference = [line.copy() for line in area]
 
+height = len(area)
+width = len(area[0])
 
 def safe_count(area, x, y):
 	if x < 0 or x >= len(area):
@@ -60,28 +62,30 @@ def count_seen_seats(area, x, y):
 
 changes = 1
 temp = [line.copy() for line in area]
+
 while changes != 0:
 	changes = 0
 
 	next_area = temp
 
-	for x in range(len(area)):
-		for y in range(len(area[0])):
+	for idx in range(height * width):
+            x = idx // width
+            y = idx % width
 
-			if reference[x][y] == '.':
-				continue
+            if reference[x][y] == '.':
+                    continue
 
-			taken_seats = count_seen_seats(area, x, y) 
-			# taken_seats += count_adjacent_seats(area, x, y)
+            taken_seats = count_seen_seats(area, x, y) 
+            # taken_seats += count_adjacent_seats(area, x, y)
 
-			if area[x][y] == 'L' and taken_seats == 0:
-				next_area[x][y] = '#'
-				changes += 1
-			elif area[x][y] == '#' and taken_seats >= 5:  # 4 for part 1
-				next_area[x][y] = 'L'
-				changes += 1
-			else:
-				next_area[x][y] = area[x][y]
+            if area[x][y] == 'L' and taken_seats == 0:
+                    next_area[x][y] = '#'
+                    changes += 1
+            elif area[x][y] == '#' and taken_seats >= 5:  # 4 for part 1
+                    next_area[x][y] = 'L'
+                    changes += 1
+            else:
+                    next_area[x][y] = area[x][y]
 
 	temp = area
 	area = next_area
