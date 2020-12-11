@@ -35,10 +35,10 @@ def count_adjacent_seats(area, x, y):
 def safe_seen(area, x, y, dx, dy):
 	x += dx
 	y += dy
-	while x >= 0 and x < len(area) and y >= 0 and y < len(area[0]):
-		if area[x][y] == 'L':
+	while x >= 0 and x < height and y >= 0 and y < width:
+		if area[(x, y)] == 'L':
 			return 0
-		elif area[x][y] == '#':
+		elif area[(x, y)] == '#':
 			return 1
 
 		x += dx
@@ -60,8 +60,15 @@ def count_seen_seats(area, x, y):
 	])
 
 
+amap = {}
+for x, row in enumerate(area):
+    for y, item in enumerate(row):
+        amap[(x, y)] = item
+
+
+
 changes = 1
-temp = [line.copy() for line in area]
+temp = amap.copy()
 
 while changes != 0:
 	changes = 0
@@ -75,22 +82,30 @@ while changes != 0:
             if reference[x][y] == '.':
                     continue
 
-            taken_seats = count_seen_seats(area, x, y) 
+            taken_seats = count_seen_seats(amap, x, y) 
             # taken_seats += count_adjacent_seats(area, x, y)
 
-            if area[x][y] == 'L' and taken_seats == 0:
-                    next_area[x][y] = '#'
+            if amap[(x, y)] == 'L' and taken_seats == 0:
+                    next_area[(x, y)] = '#'
                     changes += 1
-            elif area[x][y] == '#' and taken_seats >= 5:  # 4 for part 1
-                    next_area[x][y] = 'L'
+            elif amap[(x, y)] == '#' and taken_seats >= 5:  # 4 for part 1
+                    next_area[(x, y)] = 'L'
                     changes += 1
             else:
-                    next_area[x][y] = area[x][y]
+                    next_area[(x, y)] = amap[(x, y)]
 
-	temp = area
-	area = next_area
+	temp = amap
+	amap = next_area
 
 
-total = ''.join([''.join(line) for line in area]).count('#')
+total = 0
+for idx in range(height * width):
+    x = idx // width
+    y = idx % width
+
+    if amap[(x, y)] == '#':
+        total += 1
+
+#total = ''.join([''.join(line) for line in area]).count('#')
 
 print(total)
