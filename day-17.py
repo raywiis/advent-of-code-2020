@@ -4,11 +4,8 @@ from collections import defaultdict
 f = open('./day-17-problem.txt')
 start = [list(line) for line in f.read().splitlines()]
 
-directions = list(product([0, -1, 1], repeat=3))[1:]
-directions_4 = list(product([0, -1, 1], repeat=4))[1:]
 
-
-def count_activated_around(a, pos):
+def count_activated_around(a, pos, directions):
     x, y, z = pos
 
     return sum([
@@ -28,12 +25,12 @@ def show(a, dx, dy, dz):
             print(''.join(line))
 
 
-def iterate(start, to, dx, dy, dz):
+def iterate(start, to, dx, dy, dz, directions):
     for z in range(-dz, dz + 1):
         for y in range(-dy, dy + 1):
             for x in range(-dx, dx + 1):
                 pos = (x, y, z)
-                activated = count_activated_around(start, pos)
+                activated = count_activated_around(start, pos, directions)
 
                 if activated == 3:
                     to[pos] = '#'
@@ -43,22 +40,22 @@ def iterate(start, to, dx, dy, dz):
                     to[pos] = '.'
 
 
-def count_activated_around_4(a, pos):
+def count_activated_around_4(a, pos, directions):
     x, y, z, w = pos
 
     return sum([
-        1 for d in directions_4
+        1 for d in directions
         if a[(x + d[0], y + d[1], z + d[2], w + d[3])] == '#'
     ])
 
 
-def iterate_4(start, to, dx, dy, dz, dw):
+def iterate_4(start, to, dx, dy, dz, dw, directions):
     for w in range(-dw, dw + 1):
         for z in range(-dz, dz + 1):
             for y in range(-dy, dy + 1):
                 for x in range(-dx, dx + 1):
                     pos = (x, y, z, w)
-                    activated = count_activated_around_4(start, pos)
+                    activated = count_activated_around_4(start, pos, directions)
 
                     if activated == 3:
                         to[pos] = '#'
@@ -69,6 +66,8 @@ def iterate_4(start, to, dx, dy, dz, dw):
 
 
 def part_1(start):
+    directions = list(product([0, -1, 1], repeat=3))[1:]
+
     a = defaultdict(lambda: '.')
     b = defaultdict(lambda: '.')
 
@@ -80,7 +79,7 @@ def part_1(start):
 
     for _ in range(6):
 
-        iterate(a, b, dx, dy, dz)
+        iterate(a, b, dx, dy, dz, directions)
 
         a, b = b, a
 
@@ -92,6 +91,8 @@ def part_1(start):
 
 
 def part_2(start):
+    directions = list(product([0, -1, 1], repeat=4))[1:]
+
     a = defaultdict(lambda: '.')
     b = defaultdict(lambda: '.')
 
@@ -102,7 +103,7 @@ def part_2(start):
     dx, dy, dz, dw = len(start[0]), len(start), 1, 1
 
     for _ in range(6):
-        iterate_4(a, b, dx, dy, dz, dw)
+        iterate_4(a, b, dx, dy, dz, dw, directions)
 
         a, b = b, a
 
