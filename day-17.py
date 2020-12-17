@@ -4,35 +4,18 @@ from collections import defaultdict
 f = open('./day-17-problem.txt')
 start = [list(line) for line in f.read().splitlines()]
 
-a = defaultdict(lambda: '.')
-b = defaultdict(lambda: '.')
-
-a_4 = defaultdict(lambda: '.')
-b_4 = defaultdict(lambda: '.')
-
-debug = defaultdict(lambda: '0')
-
-for y, line in enumerate(start):
-    for x, char in enumerate(line):
-        a[(x, y, 0)] = char
-        a_4[(x, y, 0, 0)] = char
-
-
 directions = list(product([0, -1, 1], repeat=3))[1:]
 directions_4 = list(product([0, -1, 1], repeat=4))[1:]
 
+
 def count_activated_around(a, pos):
+    x, y, z = pos
 
-    total = 0
-    for d in directions:
-        x, y, z = pos
-        x += d[0]
-        y += d[1]
-        z += d[2]
-        if a[(x, y, z)] == '#':
-            total += 1
+    return sum([
+        1 for d in directions
+        if a[(x + d[0], y + d[1], z + d[2])] == '#'
+    ])
 
-    return total
 
 def show(a, dx, dy, dz):
     for z in range(-dz, dz + 1):
@@ -45,15 +28,13 @@ def show(a, dx, dy, dz):
             print(''.join(line))
 
 
-
 def iterate(start, to, dx, dy, dz):
     for z in range(-dz, dz + 1):
         for y in range(-dy, dy + 1):
             for x in range(-dx, dx + 1):
                 pos = (x, y, z)
                 activated = count_activated_around(start, pos)
-                
-                debug[(pos)] = str(activated)
+
                 if activated == 3:
                     to[pos] = '#'
                 elif activated == 2 and start[pos] == '#':
@@ -63,18 +44,13 @@ def iterate(start, to, dx, dy, dz):
 
 
 def count_activated_around_4(a, pos):
+    x, y, z, w = pos
 
-    total = 0
-    for d in directions_4:
-        x, y, z, w = pos
-        x += d[0]
-        y += d[1]
-        z += d[2]
-        w += d[3]
-        if a[(x, y, z, w)] == '#':
-            total += 1
+    return sum([
+        1 for d in directions_4
+        if a[(x + d[0], y + d[1], z + d[2], w + d[3])] == '#'
+    ])
 
-    return total
 
 def iterate_4(start, to, dx, dy, dz, dw):
     for w in range(-dw, dw + 1):
@@ -83,8 +59,7 @@ def iterate_4(start, to, dx, dy, dz, dw):
                 for x in range(-dx, dx + 1):
                     pos = (x, y, z, w)
                     activated = count_activated_around_4(start, pos)
-                    
-                    debug[(pos)] = str(activated)
+
                     if activated == 3:
                         to[pos] = '#'
                     elif activated == 2 and start[pos] == '#':
@@ -93,16 +68,19 @@ def iterate_4(start, to, dx, dy, dz, dw):
                         to[pos] = '.'
 
 
+def part_1(start):
+    a = defaultdict(lambda: '.')
+    b = defaultdict(lambda: '.')
 
+    for y, line in enumerate(start):
+        for x, char in enumerate(line):
+            a[(x, y, 0)] = char
 
-def part_1(a, b):
     dx, dy, dz = len(start[0]), len(start), 1
-    #show(a, dx, dy, dz)
 
-    for i in range(6):
+    for _ in range(6):
 
         iterate(a, b, dx, dy, dz)
-        #show(debug, dx, dy, dz)
 
         a, b = b, a
 
@@ -110,25 +88,31 @@ def part_1(a, b):
         dy += 1
         dz += 1
 
-    #show(a, dx, dy, dz)
     return len(list(filter(lambda v: v == '#', a.values())))
-        
-def part_2(a_4, b_4):
+
+
+def part_2(start):
+    a = defaultdict(lambda: '.')
+    b = defaultdict(lambda: '.')
+
+    for y, line in enumerate(start):
+        for x, char in enumerate(line):
+            a[(x, y, 0, 0)] = char
+
     dx, dy, dz, dw = len(start[0]), len(start), 1, 1
 
-    for i in range(6):
-        #print('gen', i)
+    for _ in range(6):
+        iterate_4(a, b, dx, dy, dz, dw)
 
-        iterate_4(a_4, b_4, dx, dy, dz, dw)
-
-        a_4, b_4 = b_4, a_4
+        a, b = b, a
 
         dx += 1
         dy += 1
         dz += 1
         dw += 1
 
-    return len(list(filter(lambda v: v == '#', a_4.values())))
+    return len(list(filter(lambda v: v == '#', a.values())))
 
-print(part_1(a, b))
-print(part_2(a_4, b_4))
+
+print(part_1(start))
+print(part_2(start))
