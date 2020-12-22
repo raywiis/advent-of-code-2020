@@ -33,7 +33,6 @@ def recursive_combat(a, b):
 	a = deque(a.copy())
 	b = deque(b.copy())
 
-	#print('rec')
 	snaps = set()
 	while len(a) > 0 and len(b) > 0:
 		snap = str(a) + ' ' + str(b)
@@ -41,9 +40,6 @@ def recursive_combat(a, b):
 		if snap in snaps:
 			return 'a'
 		snaps.add(snap)
-
-		#print('p1', a)
-		#print('p2', b)
 
 		ca = a.popleft()
 		cb = b.popleft()
@@ -55,10 +51,8 @@ def recursive_combat(a, b):
 				b += [cb, ca]
 		else:
 			if ca > cb:
-				#print('p1 wins')
 				a += [ca, cb]
 			else:
-				#print('p2 wins')
 				b += [cb, ca]
 
 	if len(a) > 0:
@@ -68,19 +62,13 @@ def recursive_combat(a, b):
 
 def part2(a, b):
 	snaps = set()
-	#round = 0
 	while len(a) > 0 and len(b) > 0:
-		#round += 1
-		#print('round', round)
 
 		snap = str(a) + ' ' + str(b)
 		if snap in snaps:
 			print(calc_score(a))
 			return
 		snaps.add(snap)
-
-		#print('p1', a)
-		#print('p2', b)
 
 		ca = a.popleft()
 		cb = b.popleft()
@@ -92,10 +80,8 @@ def part2(a, b):
 				b += [cb, ca]
 		else:
 			if ca > cb:
-				#print('p1 wins')
 				a += [ca, cb]
 			else:
-				#print('p2 wins')
 				b += [cb, ca]
 
 	winner = b if len(a) == 0 else a
