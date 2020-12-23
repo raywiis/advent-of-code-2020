@@ -13,19 +13,19 @@ def parse_tile(tile_string):
 tiles = [parse_tile(t) for t in tiles]
 
 def t_top(tile):
-	(t_id, body) = tile
+	(_, body) = tile
 	return body[0]
 
 def t_right(tile):
-	(t_id, body) = tile
+	(_, body) = tile
 	return ''.join([l[-1] for l in body])
 
 def t_bottom(tile):
-	(t_id, body) = tile
+	(_, body) = tile
 	return body[-1][::-1]
 
 def t_left(tile):
-	(t_id, body) = tile
+	(_, body) = tile
 	return ''.join([l[0] for l in body][::-1])
 
 
