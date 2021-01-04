@@ -1,4 +1,4 @@
-f = open('./day-4-problem.txt')
+f = open('./day-04-problem.txt')
 
 batch = f.read().split('\n\n')
 batch = [e.split() for e in batch]

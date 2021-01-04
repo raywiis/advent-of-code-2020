@@ -1,4 +1,4 @@
-f = open('./day-8-problem.txt')
+f = open('./day-08-problem.txt')
 gapp = f.read().splitlines()
 
 def run_app(swapIdx):

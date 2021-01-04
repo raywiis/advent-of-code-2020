@@ -1,4 +1,4 @@
-f = open('./day-6-problem.txt')
+f = open('./day-06-problem.txt')
 data = f.read().split('\n\n')
 
 data = [a.splitlines() for a in data]

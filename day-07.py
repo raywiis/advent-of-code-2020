@@ -1,6 +1,6 @@
 import re
 
-f = open('./day-7-problem.txt')
+f = open('./day-07-problem.txt')
 data = f.read().splitlines()
 
 def parse_rule(line):

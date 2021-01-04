@@ -1,5 +1,6 @@
-f = open('./day-2-problem.txt')
+f = open('./day-02-problem.txt')
 passwords = [line.split(':') for line in f.read().splitlines()]
+
 
 def matches_rules_2(rule, password):
     first, second, letter = parse_rule(rule)
@@ -8,18 +9,19 @@ def matches_rules_2(rule, password):
         return True
 
     if password[first] != letter and password[second] == letter:
-            return True
+        return True
 
     return False
+
 
 def matches_rules(rule, password):
     lower, upper, letter = parse_rule(rule)
 
     letter_map = dict()
-    for l in password:
-        if l not in letter_map:
-            letter_map[l] = 0
-        letter_map[l] += 1
+    for let in password:
+        if let not in letter_map:
+            letter_map[let] = 0
+        letter_map[let] += 1
 
     if letter not in letter_map:
         if lower == 0:
@@ -40,6 +42,7 @@ def parse_rule(ruleString):
 
     return int(lower), int(upper), letter
 
+
 count = 0
 for [rule, password] in passwords:
     if matches_rules(rule, password):
@@ -53,5 +56,3 @@ for [rule, password] in passwords:
         count += 1
 
 print(count)
-
-

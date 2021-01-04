@@ -1,4 +1,4 @@
-f = open('./day-5-problem.txt')
+f = open('./day-05-problem.txt')
 passes = f.read().splitlines()
 
 def get_position(p):

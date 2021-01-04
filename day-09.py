@@ -1,4 +1,4 @@
-f = open('./day-9-problem.txt')
+f = open('./day-09-problem.txt')
 numbers = [int(num) for num in f.read().splitlines()]
 
 lookback = 25

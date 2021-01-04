@@ -1,6 +1,6 @@
 from functools import reduce
 
-f = open('./day-3-problem.txt')
+f = open('./day-03-problem.txt')
 area = f.read().splitlines()
 
 
