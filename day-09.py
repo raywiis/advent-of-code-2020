@@ -22,7 +22,7 @@ top = 2
 
 while top < len(numbers):
     rang = numbers[bottom:top]
-    range_sum=sum(rang)
+    range_sum = sum(rang)
     if range_sum == gtarget:
         print(min(rang) + max(rang))
         break
@@ -32,4 +32,3 @@ while top < len(numbers):
         bottom += 1
 
     assert bottom + 2 <= top
-

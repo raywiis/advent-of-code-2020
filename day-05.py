@@ -1,6 +1,7 @@
 f = open('./day-05-problem.txt')
 passes = f.read().splitlines()
 
+
 def get_position(p):
     row_upper = 127
     row_lower = 0
@@ -44,6 +45,7 @@ def seat_id(s):
     (row, col) = s
     return (row * 8) + col
 
+
 seats = [[(row, col) for col in range(0, 7)] for row in range(0, 127)]
 positions = [get_position(s) for s in passes]
 
@@ -56,5 +58,4 @@ for pos in positions:
 
 # 63 * 8 + 4 = 508 - too low
 # 64 * 8 + 5 = 517 - yes
-#print(seats)
 print(seat_id((64, 5)))

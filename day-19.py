@@ -18,8 +18,8 @@ for r in rules:
 
 
 def make_production(production):
-    l = [a[1:2] for a in production]
-    return ''.join(l)
+    line = [a[1:2] for a in production]
+    return ''.join(line)
 
 
 def verify(message, production, r_map, cache):
@@ -40,7 +40,6 @@ def verify(message, production, r_map, cache):
     else:
         test = make_production(production)
         cache.add(test)
-#        print(test)
         if test == message:
             return True
         else:
@@ -53,10 +52,9 @@ def part_1():
     cache = set()
     verify('x', ['0'], r_map, cache)
 
-    for idx, a in enumerate(data):
+    for a in data:
         if a in cache:
             results += 1
-    #    print(idx)
 
     print(results)
 
@@ -66,10 +64,9 @@ def parts_verify(message, c42, c31, seglen):
 
     assert len(parts[-1]) == seglen
 
-    # Handmade rules for the dataset 
+    # Handmade rules for the dataset
     # at least 2 c42 in front, at least c31 in back
     # count of c31 + 1 <= count of c42
-
 
     idx = 0
     c42c = 0
@@ -99,9 +96,6 @@ def parts_verify(message, c42, c31, seglen):
 
 
 def part_2():
-    #r_map['8'] = [['42'], ['42', '8']]
-    #r_map['11'] = [['42', '31'], ['42', '11', '31']]
-
     cache = set()
     verify('x', ['42'], r_map, cache)
     cache_42 = cache
@@ -112,9 +106,10 @@ def part_2():
 
     res = 0
     for m in data:
-        if parts_verify(m, cache_42, cache_31, 8): # last arg 5 for sample-2
+        if parts_verify(m, cache_42, cache_31, 8):  # last arg 5 for sample-2
             res += 1
     print(res)
+
 
 part_1()
 part_2()

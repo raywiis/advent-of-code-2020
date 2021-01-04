@@ -15,6 +15,7 @@ def count_trees(right, down):
 
     return count
 
+
 print(count_trees(3, 1))
 
 # Right 1, down 1.

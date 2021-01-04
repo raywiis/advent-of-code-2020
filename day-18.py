@@ -5,13 +5,11 @@ f = open('./day-18-problem.txt')
 d = f.read().splitlines()
 
 
-def calc_expr(line, start =0):
-
+def calc_expr(line, start=0):
     total = 0
     op = '+'
     pos = start
     while pos < len(line):
-        #print(line[pos], total)
         num = 0
         if line[pos] == '*' or line[pos] == '+':
             op = line[pos]
@@ -21,7 +19,7 @@ def calc_expr(line, start =0):
             num, pos = calc_expr(line, pos + 1)
         elif line[pos] == ')':
             return total, pos
-        else: # assume number
+        else:  # assume number
             num = int(line[pos])
 
         if op == '*':
@@ -35,15 +33,17 @@ def calc_expr(line, start =0):
     return total
 
 
-exprs = [l.replace('(', '( ') for l in d]
-exprs = [l.replace(')', ' )') for l in exprs]
-exprs = [l.split(' ') for l in exprs]
+exprs = [line.replace('(', '( ') for line in d]
+exprs = [line.replace(')', ' )') for line in exprs]
+exprs = [line.split(' ') for line in exprs]
 
-vals = [calc_expr(l) for l in exprs]
+vals = [calc_expr(line) for line in exprs]
 print(sum(vals))
+
 
 def calc_sum(a):
     return sum(int(e) for e in a.split('+'))
+
 
 def calc_flat(t):
     t = ''.join(t)
@@ -68,13 +68,7 @@ def calc_expr_2(line):
         idx += 1
 
     return calc_flat(stack[0])
-            
 
 
-
-
-
-#print(calc_expr_2(exprs[0]))
-vals_2 = [int(calc_expr_2(l)) for l in d]
+vals_2 = [int(calc_expr_2(line)) for line in d]
 print(sum(vals_2))
-

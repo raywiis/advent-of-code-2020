@@ -3,6 +3,7 @@ import re
 f = open('./day-07-problem.txt')
 data = f.read().splitlines()
 
+
 def parse_rule(line):
     [outer, inner] = line.split('contain')
     outer = outer[:-5].strip()
@@ -42,6 +43,8 @@ print(len(counted_bags) - 1)
 
 
 rules = dict([(i[0], i[1]) for i in rules])
+
+
 def count_inside_bags(color):
     inner = rules[color]
 
@@ -52,6 +55,6 @@ def count_inside_bags(color):
         count = sum(bags) + 1
         return count
 
+
 # 195 - too low
 print(count_inside_bags('shiny gold') - 1)
-

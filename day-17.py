@@ -55,7 +55,8 @@ def iterate_4(start, to, dx, dy, dz, dw, directions):
             for y in range(-dy, dy + 1):
                 for x in range(-dx, dx + 1):
                     pos = (x, y, z, w)
-                    activated = count_activated_around_4(start, pos, directions)
+                    activated = count_activated_around_4(
+                        start, pos, directions)
 
                     if activated == 3:
                         to[pos] = '#'

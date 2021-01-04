@@ -9,25 +9,26 @@ facing = {
 }
 
 vectors = {
-        'N': (0, 1),
-        'E': (1, 0),
-        'S': (0, -1),
-        'W': (-1, 0),
+    'N': (0, 1),
+    'E': (1, 0),
+    'S': (0, -1),
+    'W': (-1, 0),
 }
 
 
 def rotateLeft(pos, angle):
     (a, b) = pos
 
-    for i in range(angle // 90):
+    for _ in range(angle // 90):
         (a, b) = (-b, a)
 
     return (a, b)
 
+
 def rotateRight(pos, angle):
     (a, b) = pos
 
-    for i in range(angle // 90):
+    for _ in range(angle // 90):
         (a, b) = (b, -a)
 
     return (a, b)
@@ -53,7 +54,6 @@ for action in data:
         (dh, dv) = vectors[action[0]]
 
     position = (h + distance * dh, v + dv * distance)
-    #print(position)
 
 total_distance = abs(position[0]) + abs(position[1])
 print(total_distance)
@@ -75,8 +75,6 @@ for action in data:
     else:
         (dh, dv) = vectors[action[0]]
         waypoint = (waypoint[0] + dh * distance, waypoint[1] + dv * distance)
-
-    #print(position)
 
 total_distance = abs(position[0]) + abs(position[1])
 print(total_distance)

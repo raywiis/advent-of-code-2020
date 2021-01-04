@@ -5,19 +5,19 @@ adapters.sort()
 
 cap = max(adapters) + 3
 
-diffs = [0,0,1]
+diffs = [0, 0, 1]
 current = 0
 
 diffmap = []
 for i in adapters:
-   diff = i - current
+    diff = i - current
 
-   assert(diff < 4 and diff > 0)
+    assert(diff < 4 and diff > 0)
 
-   diffmap.append(diff)
+    diffmap.append(diff)
 
-   current = i
-   diffs[diff - 1] += 1
+    current = i
+    diffs[diff - 1] += 1
 
 print(diffs[0] * diffs[2])
 
@@ -26,6 +26,7 @@ cache = {
     2: 2,
     3: 4
 }
+
 
 def get_iters(target):
     if target not in cache:
@@ -36,6 +37,7 @@ def get_iters(target):
 
     return cache[target]
 
+
 diffmap = ''.join([str(i) for i in diffmap]).split('3')
 diffmap = list(filter(lambda x: x > 0, [len(x) for x in diffmap]))
 diffmap = [get_iters(i) for i in diffmap]
@@ -43,4 +45,3 @@ diffmap = [get_iters(i) for i in diffmap]
 target = reduce(lambda a, b: a * b, diffmap)
 
 print(target)
-

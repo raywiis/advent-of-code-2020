@@ -3,6 +3,7 @@ data = f.read().split('\n\n')
 
 data = [a.splitlines() for a in data]
 
+
 def get_set_1(group):
     total = set()
 
@@ -11,6 +12,7 @@ def get_set_1(group):
         total = total.union(answers)
 
     return total
+
 
 def get_set_2(group):
     total = set(group[0])
@@ -29,4 +31,3 @@ print(sum(counts))
 counts = [len(get_set_2(g)) for g in data]
 
 print(sum(counts))
-

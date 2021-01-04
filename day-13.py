@@ -24,31 +24,32 @@ min_wait_idx = waits.index(min_wait)
 
 print(min_wait * times[min_wait_idx])
 
-def inverse_mod(a, m): 
-    m0 = m 
+
+def inverse_mod(a, m):
+    m0 = m
     y = 0
     x = 1
 
-    if (m == 1): 
+    if (m == 1):
         return 0
 
-    while (a > 1): 
-        q = a // m 
+    while (a > 1):
+        q = a // m
 
-        t = m 
+        t = m
 
-        m = a % m 
-        a = t 
-        t = y 
+        m = a % m
+        a = t
+        t = y
 
-        y = x - q * y 
-        x = t 
+        y = x - q * y
+        x = t
 
-    # Make x positive 
-    if (x < 0): 
-        x = x + m0 
+    # Make x positive
+    if (x < 0):
+        x = x + m0
 
-    return x 
+    return x
 
 
 N = reduce(lambda a, b: a * b, times)

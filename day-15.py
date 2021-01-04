@@ -1,8 +1,8 @@
-#starting = [0, 3, 6] # sample
-#starting = [1,3,2] # sample
-#starting = [2,1,3] # sample
-#starting = [3,1,2] # sample
-starting = [19,20,14,0,9,1]
+# starting = [0, 3, 6] # sample
+# starting = [1,3,2] # sample
+# starting = [2,1,3] # sample
+# starting = [3,1,2] # sample
+starting = [19, 20, 14, 0, 9, 1]
 
 
 current = 1
@@ -13,7 +13,7 @@ for i in starting:
     current += 1
     last_number = i
 
-while current <= 30000000: # 2020:
+while current <= 30000000:  # 2020:
 
     if len(numbers[last_number]) == 1:
         if 0 not in numbers:
@@ -33,7 +33,5 @@ while current <= 30000000: # 2020:
         last_number = new
 
     current += 1
-
-
 
 print(last_number)

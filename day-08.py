@@ -1,6 +1,7 @@
 f = open('./day-08-problem.txt')
 gapp = f.read().splitlines()
 
+
 def run_app(swapIdx):
     ip = 0
     acc = 0
@@ -16,7 +17,6 @@ def run_app(swapIdx):
                 op = 'jmp'
             else:
                 op = 'nop'
-            
 
         used_ips.add(ip)
         if op == 'nop':
@@ -33,6 +33,7 @@ def run_app(swapIdx):
     end = ip == len(app)
 
     return [end, acc]
+
 
 for i in range(len(gapp)):
     if gapp[i].startswith('acc'):

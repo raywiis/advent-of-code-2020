@@ -32,7 +32,7 @@ solution = []
 known_ingredients = set()
 while len(mistery) > 0:
     mistery = sorted(mistery, key=lambda x: len(x[1]))
-    
+
     (a, i) = mistery.pop(0)
 
     assert len(i) == 1
@@ -57,4 +57,3 @@ solution = sorted(solution, key=lambda x: x[0])
 
 ans = ','.join(list(map(lambda x: x[1], solution)))
 print(ans)
-

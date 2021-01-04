@@ -1,17 +1,20 @@
 f = open('./day-14-problem.txt')
 program = f.read().splitlines()
 
+
 def parse_mask(m):
     mask = m.split('=')[1].strip()
     zeroMask = int('0b' + mask.replace('X', '1'), 2)
     onesMask = int('0b' + mask.replace('X', '0'), 2)
     return zeroMask, onesMask
 
+
 def parse_instruction(i):
     i = i.split('=')
     number = int(i[1].strip())
     location = int(i[0].strip()[4:-1])
     return location, number
+
 
 memory = {}
 zeroMask = 0
@@ -28,6 +31,7 @@ for i in program:
 
 print(sum(memory.values()))
 
+
 def get_distribution(original_location, mask):
     x_count = mask.count('X')
 
@@ -43,7 +47,7 @@ def get_distribution(original_location, mask):
     for i in range(pow(2, x_count)):
         local_addr = ref_mask
 
-        for x in range(x_count):
+        for _ in range(x_count):
             bit = i & 0b1
             local_addr = local_addr.replace('X', str(bit), 1)
             i = i >> 1
@@ -65,7 +69,6 @@ for i in program:
 
     location, number = parse_instruction(i)
     locations = get_distribution(location, mask)
-    #print(locations)
 
     for loc in locations:
         memory[loc] = number
