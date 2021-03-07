@@ -9,11 +9,11 @@ for entry in entries:
     if (target - entry) in numbers:
         print(entry * (target - entry))
 
-for entry in entries:
-    for fuck in entries:
-        if entry + fuck >= target:
+for e1 in entries:
+    for e2 in entries:
+        if e1 + e2 >= target:
             continue
         else:
-            if (target - entry - fuck) in numbers:
-                print(entry * fuck * (target - entry - fuck))
+            if (target - e1 - e2) in numbers:
+                print(e1 * e2 * (target - e1 - e2))
                 exit()
